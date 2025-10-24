@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Private Jira</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <h1>Notes + Coments</h1>
+        <p class="subtitle">
+          It works locally. It saves data in <code>localStorage</code>.
+        </p>
+        <div class="toolbar" role="toolbar" aria-label="Główne akce">
+          <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="Search by title/description"
+            aria-label="Szukaj"
+          />
+          <span class="pill count" id="countPill">0 elements</span>
+          <select
+            id="filterPriority"
+            aria-label="Filtruj po priorytecie"
+            title="Filter by priority"
+          >
+            <option value="all" selected>All</option>
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
+
+          <select
+            id="filterStatus"
+            aria-label="Filtruj po statusie"
+            title="Filter by status"
+          >
+            <option value="all" selected>All</option>
+            <option value="on hold">On hold</option>
+            <option value="in progress">In progress</option>
+            <option value="done">Done</option>
+            <option value="reject">Reject</option>
+          </select>
+          <button id="clearFiltersBtn" class="ghost" title="Clear filters">
+            🧹 Clear filters
+          </button>
+          <span class="spacer"></span>
+          <button id="exportBtn" class="ghost" title="Export to JSON">
+            ⬆️ Export
+          </button>
+          <label
+            class="ghost"
+            for="importFile"
+            title="Import from JSON file"
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+              cursor: pointer;
+            "
+          >
+            ⬇️ Import
+            <input
+              id="importFile"
+              type="file"
+              accept="application/json"
+              style="display: none"
+            />
+          </label>
+          <button id="resetBtn" class="danger" title="Delete all">
+            🗑️ Delete all data
+          </button>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>
