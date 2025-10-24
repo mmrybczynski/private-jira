@@ -39,6 +39,7 @@
             title="Filter by status"
           >
             <option value="all" selected>All</option>
+            <option value="new">New</option>
             <option value="on hold">On hold</option>
             <option value="in progress">In progress</option>
             <option value="done">Done</option>
@@ -76,5 +77,68 @@
         </div>
       </div>
     </header>
+
+    <div class="wrap">
+      <section aria-label="addSectionTitle">
+        <h2
+          id="addSectionTitle"
+          class="visually-hidden"
+          style="position: absolute; left: -9999px"
+        >
+          Add element
+        </h2>
+        <form class="add-item" id="addItemForm">
+          <div class="row">
+            <input
+              type="text"
+              id="title"
+              placeholder="Title"
+              required
+              maxlength="120"
+              aria-label="Tytuł"
+            />
+          </div>
+          <textarea
+            id="desc"
+            placeholder="Description"
+            maxlength="2000"
+            aria-label="Opis"
+          ></textarea>
+          <div class="row">
+            <select id="priority" aria-label="Priorytet">
+              <option value="low">Low</option>
+              <option value="normal" selected>Normal</option>
+              <option value="high">High</option>
+            </select>
+
+            <input
+              type="text"
+              id="origin"
+              placeholder="Origin"
+              maxlength="120"
+              aria-label="Pochodzenie"
+            />
+
+            <select id="status" aria-label="Status początkowy">
+              <option value="new" selected>New</option>
+            </select>
+          </div>
+
+          <button class="primary" type="submit">➕ Add</button>
+
+          <p class="hint">The date added is saved automatically.</p>
+        </form>
+      </section>
+      <main>
+        <div id="items" class="grid" aria-live="polite" aria-busy="false"></div>
+        <div id="emptyState" class="empty" hidden>
+          No elements. ✨
+        </div>
+      </main>
+
+      <div class="footer">
+        Everything works serverless – just in your browser.
+      </div>
+    </div>
   </body>
 </html>
