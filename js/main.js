@@ -24,6 +24,23 @@
     return n;
   };
 
+  const load = () => {
+    try {
+      console.log("Fetching data.");
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : { items: [] };
+    } catch (e) {
+      console.log("Error fetching data from localStorage", e);
+      return { items: [] };
+    }
+  };
+
+  let state = load();
+  let uiFilters = {
+    priority: "all",
+    status: "all",
+  };
+
   const itemsEl = document.getElementById("items");
   const emptyEl = document.getElementById("emptyState");
   const addItemForm = document.getElementById("addItemForm");
