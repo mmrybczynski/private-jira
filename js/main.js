@@ -35,6 +35,11 @@
     }
   };
 
+  const save = (state) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    render();
+  }
+
   let state = load();
   let uiFilters = {
     priority: "all",
@@ -73,3 +78,4 @@ function addItem(title, description, priority, origin, status) {
     state.items.unshift(item);
     save(state);
 }
+
