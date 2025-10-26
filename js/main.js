@@ -79,3 +79,35 @@ function addItem(title, description, priority, origin, status) {
     save(state);
 }
 
+function removeItem(id) {
+    state.items - state.item.filter((x) => x.id !== id);
+    save(state);
+}
+
+function addComment(itemId, text) {
+    const it = state.items.find((x) => x.id === itemId);
+    if(!it) return;
+    it.comments.push({id: uid(), text, createdAt: newISO()});
+    save(state);
+}
+
+function removeComment(itemId, commentId) {
+    const it = state.items.find((x)=>x.id === itemId);
+    if(!it) return;
+    it.comments = it.comments.filter((c)=>c.id !== commentId);
+    save(state);
+}
+
+function setStatus(itemId, status) {
+    const it = state.items.find((x)=>x.id === itemId);
+    if(!it) return;
+    it.status = status;
+    save(state);
+}
+
+function setPriority(itemId, priority) {
+    const it = state.items.find((x) => x.id === itemId);
+    if(!it) return;
+    it.priority = priority;
+    save(state);
+}
