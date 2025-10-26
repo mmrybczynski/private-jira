@@ -58,3 +58,18 @@
   const filterStatus = document.getElementById("filterStatus");
   const clearFiltersBtn = document.getElementById("clearFiltersBtn");
 };
+
+function addItem(title, description, priority, origin, status) {
+    const item = {
+        id: uid(),
+        title,
+        description,
+        createdAt: newISO(),
+        comments: [],
+        priority: priority || "normal",
+        origin: origin || "",
+        status: status || "new",
+    };
+    state.items.unshift(item);
+    save(state);
+}
