@@ -38,7 +38,7 @@
   const save = (state) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     render();
-  }
+  };
 
   let state = load();
   let uiFilters = {
@@ -65,49 +65,68 @@
 };
 
 function addItem(title, description, priority, origin, status) {
-    const item = {
-        id: uid(),
-        title,
-        description,
-        createdAt: newISO(),
-        comments: [],
-        priority: priority || "normal",
-        origin: origin || "",
-        status: status || "new",
-    };
-    state.items.unshift(item);
-    save(state);
+  const item = {
+    id: uid(),
+    title,
+    description,
+    createdAt: newISO(),
+    comments: [],
+    priority: priority || "normal",
+    origin: origin || "",
+    status: status || "new",
+  };
+  state.items.unshift(item);
+  save(state);
 }
 
 function removeItem(id) {
-    state.items - state.item.filter((x) => x.id !== id);
-    save(state);
+  state.items - state.item.filter((x) => x.id !== id);
+  save(state);
 }
 
 function addComment(itemId, text) {
-    const it = state.items.find((x) => x.id === itemId);
-    if(!it) return;
-    it.comments.push({id: uid(), text, createdAt: newISO()});
-    save(state);
+  const it = state.items.find((x) => x.id === itemId);
+  if (!it) return;
+  it.comments.push({ id: uid(), text, createdAt: newISO() });
+  save(state);
 }
 
 function removeComment(itemId, commentId) {
-    const it = state.items.find((x)=>x.id === itemId);
-    if(!it) return;
-    it.comments = it.comments.filter((c)=>c.id !== commentId);
-    save(state);
+  const it = state.items.find((x) => x.id === itemId);
+  if (!it) return;
+  it.comments = it.comments.filter((c) => c.id !== commentId);
+  save(state);
 }
 
 function setStatus(itemId, status) {
-    const it = state.items.find((x)=>x.id === itemId);
-    if(!it) return;
-    it.status = status;
-    save(state);
+  const it = state.items.find((x) => x.id === itemId);
+  if (!it) return;
+  it.status = status;
+  save(state);
 }
 
 function setPriority(itemId, priority) {
-    const it = state.items.find((x) => x.id === itemId);
-    if(!it) return;
-    it.priority = priority;
-    save(state);
+  const it = state.items.find((x) => x.id === itemId);
+  if (!it) return;
+  it.priority = priority;
+  save(state);
+}
+
+function render() {
+  for (const it of state.items) {
+    if (!("priority" in it)) it.priority = "normal";
+    if (!("origin" in it)) it.origin = "";
+    if (!("status" in it)) it.status = "new";
+  }
+  const q = (searchInput.value || "").trim().toLowerCase();
+  console.log(q);
+  const byQuery = (it) => 
+    !q ||
+    (it.title || "").toLowerCase().includes(q) ||
+    (it.description || "").toLowerCase().includes(q) ||
+    (it.origin || "").toLowerCase().includes(q) ||
+    (it.priority || "").toLowerCase().includes(q) ||
+    (it.status || "").toLowerCase().includes(q) ||
+    it.comments.some((c) => (c.text || "").toLowerCase().includes(q));
+    
 }
